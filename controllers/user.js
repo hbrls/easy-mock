@@ -1,6 +1,8 @@
 'use strict'
 
 const _ = require('lodash')
+const rnd = require('vanilla.js/random/dummy')
+const Ldaptive = require('ldaptive')
 const config = require('config')
 const jwt = require('jsonwebtoken')
 
@@ -81,12 +83,18 @@ module.exports = class UserController {
       return
     }
 
-    const verifyPassword = util.bcompare(password, user.password)
+    // 验证密码
+    // const verifyPassword = util.bcompare(password, user.password)
 
-    if (!verifyPassword) {
-      ctx.body = ctx.util.refail('用户名或密码错误')
-      return
-    }
+    // if (!verifyPassword) {
+    //   ctx.body = ctx.util.refail('用户名或密码错误')
+    //   return
+    // }
+
+    const client = new Ldaptive(config.ldaptive)
+    const ldapUser = yield client.authenticate(name, password)
+    console.log(ldapUser)
+    const verifyPassword = true
 
     user.token = jwt.sign({ id: user.id }, jwtSecret, { expiresIn: jwtExpire })
 
@@ -141,6 +149,11 @@ module.exports = class UserController {
       limit: pageSize,
       sort: '-create_at'
     }
+
+    const client = new Ldaptive(config.ldaptive)
+    const ldapUser = yield client.authenticate(name, password)
+
+    const npassword = yield util.bhash(rnd()) // ** DO NOT SAVE LDAP PASSWORD
 
     const where = {
       _id: {

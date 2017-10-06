@@ -66,8 +66,8 @@ export default {
     login: {
       description: '伪造数据，我们更高效 | 但，不仅于此',
       form: {
-        button: '开始吧 | 登录',
-        placeholder: '用户名，没有会自动注册哦 | 密码'
+        button: '开始吧 | LDAP 登录',
+        placeholder: 'LDAP 用户名，通常是你的姓名拼音 | 密码'
       },
       about: 'Easy Mock 是什么？| 是一个可视化，并且能快速生成模拟数据的服务。',
       feature: [
@@ -80,7 +80,7 @@ export default {
       ],
       confirm: {
         register: {
-          content: '该用户不存在, 是否根据当前输入的用户名和密码注册用户?注：请妥善保管好你的密码，目前无法提供找回密码的通道。',
+          content: '该用户不存在, 是否根据当前输入的用户名和密码同步用户？',
           success: '注册成功'
         }
       }
