@@ -2,9 +2,9 @@ FROM node:8.6.0-slim
 
 # easy-mock
 RUN \
-  cd /var && wget https://github.com/hbrls/easy-mock/archive/docker-1.3.0.tar.gz && \
-  tar -zxvf /var/docker-1.3.0.tar.gz -C /var && rm /var/docker-1.3.0.tar.gz && \
-  mv /var/easy-mock-docker-1.3.0 /var/easy-mock
+  cd /var && wget https://github.com/hbrls/easy-mock/archive/docker-1.3.0-ldap.tar.gz && \
+  tar -zxvf /var/docker-1.3.0-ldap.tar.gz -C /var && rm /var/docker-1.3.0-ldap.tar.gz && \
+  mv /var/easy-mock-docker-1.3.0-ldap /var/easy-mock
 
 EXPOSE 7300
 

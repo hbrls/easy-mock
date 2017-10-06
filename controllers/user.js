@@ -1,6 +1,8 @@
 'use strict'
 
 const _ = require('lodash')
+const rnd = require('vanilla.js/random/dummy')
+const Ldaptive = require('ldaptive')
 const config = require('config')
 
 const p = require('../proxy')
@@ -90,7 +92,11 @@ exports.login = function * () {
   }
 
   // 验证密码
-  const verifyPassword = yield util.bcompare(password, user.password)
+  // const verifyPassword = yield util.bcompare(password, user.password)
+  const client = new Ldaptive(config.ldaptive)
+  const ldapUser = yield client.authenticate(name, password)
+  console.log(ldapUser)
+  const verifyPassword = true
 
   if (!verifyPassword) {
     this.body = this.util.refail('请检查密码是否正确')
@@ -131,7 +137,10 @@ exports.register = function * () {
     return
   }
 
-  const npassword = yield util.bhash(password)
+  const client = new Ldaptive(config.ldaptive)
+  const ldapUser = yield client.authenticate(name, password)
+
+  const npassword = yield util.bhash(rnd()) // ** DO NOT SAVE LDAP PASSWORD
 
   yield userProxy.newAndSave(
     name,
