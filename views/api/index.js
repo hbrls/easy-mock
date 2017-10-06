@@ -6,7 +6,7 @@ import cookie from 'react-cookie'
 let router
 const isClient = process.env.VUE_ENV === 'client'
 const instance = axios.create({
-  baseURL: conf.APIPrefix,
+  baseURL: (process.env.EASYMOCK_HOST || '') + conf.APIPrefix,
   timeout: conf.timeout
 })
 
