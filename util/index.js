@@ -4,16 +4,16 @@ const _ = require('lodash')
 const path = require('path')
 const config = require('config')
 const rimraf = require('rimraf')
-const Redis = require('ioredis')
+// const Redis = require('ioredis')
 const moment = require('moment')
 const bcrypt = require('bcryptjs')
 const pathToRegexp = require('path-to-regexp')
 const { MockCountProxy } = require('../proxy')
 
-const redisConf = config.get('redis')
-const redis = new Redis(redisConf.port, redisConf.host, {
-  keyPrefix: '[Easy Mock]'
-})
+// const redisConf = config.get('redis')
+// const redis = new Redis(redisConf.port, redisConf.host, {
+//   keyPrefix: '[Easy Mock]'
+// })
 
 module.exports = class BaseUtil {
   /**
@@ -25,13 +25,13 @@ module.exports = class BaseUtil {
     this.mockUseCountSchedule()
   }
 
-  /**
-   * 获取 redis 实例
-   */
+  // /**
+  //  * 获取 redis 实例
+  //  */
 
-  static getRedis () {
-    return redis
-  }
+  // static getRedis () {
+  //   return redis
+  // }
 
   /**
    * 加密字符串
@@ -113,16 +113,16 @@ module.exports = class BaseUtil {
   }
 
   static mockUseCountSchedule () {
-    async function run () {
-      const len = await redis.llen('mock.count')
-      if (len === 0) return
-      const mockIds = await redis.lrange('mock.count', -len, len)
-      await redis.ltrim('mock.count', 0, -(len + 1))
-      await MockCountProxy.newAndSave(mockIds)
-    }
+    // async function run () {
+    //   const len = await redis.llen('mock.count')
+    //   if (len === 0) return
+    //   const mockIds = await redis.lrange('mock.count', -len, len)
+    //   await redis.ltrim('mock.count', 0, -(len + 1))
+    //   await MockCountProxy.newAndSave(mockIds)
+    // }
 
-    run()
-    setInterval(run, 1000 * 10)
+    // run()
+    // setInterval(run, 1000 * 10)
   }
 
   /**
