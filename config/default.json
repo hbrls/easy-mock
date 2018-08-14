@@ -34,7 +34,7 @@
     }
   },
   "ldap": {
-    "server": "",
+    "server": "force-webpack-to-run-with-ldap-enabled",
     "bindDN": "",
     "password": "",
     "filter": {
