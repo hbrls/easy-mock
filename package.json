@@ -8,7 +8,7 @@
     "test:watch": "npm run test -- --watch",
     "test:cover": "npm run test -- --coverage",
     "lint": "eslint --ignore-path .gitignore . --quiet --ext .vue,.js",
-    "dev": "nodemon --ignore views/ --ignore public/ app",
+    "dev": "NODE_EXTRA_CA_CERTS=/Users/albert/server-operation/innersso/sit/ca-sit.cer nodemon --ignore views/ --ignore public/ app",
     "dev:client": "node app",
     "dev:server": "cross-env NODE_ENV=production npm run dev",
     "start": "cross-env NODE_ENV=production node app",
